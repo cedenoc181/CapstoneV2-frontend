@@ -1,23 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import { Routes } from "react-router-dom"
+// import axios from "axios"
+import Header from "./Header-folder/Header.jsx"
+import Home from "./Home-folder/Home.jsx"
+import Physical from "./Pt-folder/PhysicalTherapy.jsx"
+import Exercises from "./Exercise-folder/exercises.jsx";
+
+
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <Header />
+      <Routes>Login up page</Routes>
+      <Routes>sign up page</Routes>
+      <Routes>Physical Therapist page</Routes>
+      <Routes>Exercises page</Routes>
+      <Routes path="/home" element={<Home />}>Home page</Routes>
+      <Routes>Account</Routes>
+      <Routes>Article page</Routes>
+
     </div>
   );
 }
