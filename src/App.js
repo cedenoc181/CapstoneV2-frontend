@@ -8,6 +8,7 @@ import Exercises from "./Exercise-folder/exercises.jsx";
 import Article from "./Article-folder/Article.jsx";
 import Account from "./Account-folder/Account.jsx";
 import Login from "./Login-folder/Login.jsx";
+import Faq from "./FAQ-folder/Faq.jsx";
 
 
 

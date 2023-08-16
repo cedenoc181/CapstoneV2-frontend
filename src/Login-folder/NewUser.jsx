@@ -27,7 +27,7 @@ function newUser() {
                       setEmail("");
                       setNewPassword("");
                       alert("signed up success");
-                      // navigate("/Account")
+                      navigate("/Login")
                       // setLog(true)
                       
           })
