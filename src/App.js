@@ -14,6 +14,35 @@ import Login from "./Login-folder/Login.jsx";
 
 function App() {
 
+
+
+
+
+
+
+  useEffect(() => {
+    fetch("http://localhost:9292/me",{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+      response.json().then((data) => setUser(data.user));
+         }
+   });
+  }, []);
+console.log(user)
+  if (!user) 
+  return(
+  <div className="login"><Login onLogin={setUser}/></div>
+  );
+
+
+
+
+
+
   return (
     <div className="App">
 
