@@ -1,10 +1,12 @@
 import './App.css';
-import { Routes } from "react-router-dom"
-// import axios from "axios"
+import {useEffect, useState} from "react"
+import { Routes, Route } from "react-router-dom"
+import axios from "axios"
 import Header from "./Header-folder/Header.jsx"
 import Home from "./Home-folder/Home.jsx"
-import Physical from "./Pt-folder/PhysicalTherapy.jsx"
-import Exercises from "./Exercise-folder/Exercises.jsx";
+import Providers from "./Pt-folder/Providers.jsx"
+import ProviderDetail from "./Pt-folder/ProviderDetail.jsx"
+import Exercise from "./Exercise-folder/Exercise.jsx";
 import Article from "./Article-folder/Article.jsx";
 import Settings from "./Account-folder/Settings.jsx";
 import Appointments from "./Account-folder/Appointments.jsx"
@@ -17,9 +19,24 @@ import Faq from "./FAQ-folder/Faq.jsx";
 function App() {
 
 
+const [user, setUser] = useState(null)
+const [exercises, setExercises] = useState([]);
+const [therapist, setTherapist] = useState([]);
+const [searchKey, setSearchKey] = useState('')
+const [searchPt, setSearchPt] = useState('')
 
+useEffect(() => {
+  axios.get("http://localhost:9292/exercises").then((response) => {
+    console.log(response.data, "exercise data from fetch")
+    setExercises(response.data);
+  });
+}, []);
 
-
+useEffect(() => {
+  axios.get("http://localhost:9292/physical_therapists").then((response) => {
+    setTherapist(response.data);
+  });
+}, []);
 
 
   useEffect(() => {
@@ -40,24 +57,51 @@ console.log(user)
   <div className="login"><Login onLogin={setUser}/></div>
   );
 
+  // onSearch functionn is passed down to the exercise component to relay user
+  //  input to match database exercise name based on bodypart, target, name, equipment
+  // based onn the filter function
+  function onSearch (searchKey){
+    setSearchKey(searchKey)
+  }
+
+  const filteredExerciseFromSearch = exercises.filter((exercise) => {
+    return exercise.bodyPart.toLowerCase().includes(searchKey.toLowerCase()) +
+    exercise.equipment.toLowerCase().includes(searchKey.toLowerCase()) +
+    exercise.target.toLowerCase().includes(searchKey.toLowerCase()) +
+    exercise.name.toLowerCase().includes(searchKey.toLowerCase()) 
+  });
 
 
+  // ptSearch function is passed down into providers component to get the user
+  // input to match with database physical therapist names, zipcode specialization
+  function ptSearch (searchPt){
+    setSearchPt(searchPt)
+    }
+
+  const filteredPtFromSearch = therapist.filter((pt) => {
+    return pt.first_name.toLowerCase().includes(searchPt.toLowerCase()) +
+    pt.clinic_address.toLowerCase().includes(searchPt.toLowerCase()) +
+    pt.specialization.toLowerCase().includes(searchPt.toLowerCase()) +
+    pt.last_name.toLowerCase().includes(searchPt.toLowerCase()) 
+  });
 
 
 
   return (
     <div className="App">
 
-      <Header />
-      <Routes path="appointments" element={<Appointments />} />
-      <Routes path="faq" element={<Faq />}/>
-      <Routes path="/exercises" element={<Exercises />} />
-      <Routes path="/providers" element={<Physical />} />
-      <Routes path="/home" element={<Home />} />
-      <Routes path="/settings" element={<Settings />} />
-      <Routes path="/articles" element={<Article />} /> 
-      <Routes path="/Login" element={<Login />} /> 
-
+      <Header user={user} logOut={setUser}/>
+      <Routes>
+          <Route path="appointments" element={<Appointments user={user}/>} />
+          <Route path="faq" element={<Faq user={user}/>}/>
+          <Route path="/exercises" element={<Exercise onSearch={onSearch} exercises={filteredExerciseFromSearch} user={user}/>} />
+          <Route path="/providers" element={<Providers therapist={filteredPtFromSearch} searchPt={ptSearch} user={user}/>} />
+          <Route path="/providers/:id" element={<ProviderDetail user={user} />} />
+          <Route path="/home" element={<Home user={user}/>} />
+          <Route path="/settings" element={<Settings user={user}/>} />
+          <Route path="/articles" element={<Article user={user}/>} /> 
+          <Route path="/Login" element={<Login />} /> 
+      </Routes>
     </div>
   );
 }

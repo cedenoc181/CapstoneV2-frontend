@@ -2,7 +2,7 @@ import React, {useNavigate} from 'react'
 import { Link } from "react-router-dom"
 
 
-function Header() {
+function Header({logOut}) {
 
 
     const navigate = useNavigate();
