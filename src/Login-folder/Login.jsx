@@ -19,7 +19,7 @@ function handleClick() {
 (<NewUser /> )
 }
 
-<p className="accountOnclick"   align="center" onClick={handleClick}>{log ? "Don't have an account? Sign up!" : "Have an account? Login!" }</p>
+<p className="accountOnclick" align="center" onClick={handleClick}>{log ? "Don't have an account? Sign up!" : "Have an account? Login!" }</p>
     </div>
   )
 }

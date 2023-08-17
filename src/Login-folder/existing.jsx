@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function exsisting({onLogin}) {
+function Exsisting({onLogin}) {
 
-  
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
-    console.log(username, password);
+    console.log(email, password);
     e.preventDefault();
     fetch("http://localhost:9292/auth/login/", {
       method: "POST",
@@ -59,4 +59,4 @@ function exsisting({onLogin}) {
   );
 }
 
-export default exsisting;
+export default Exsisting;

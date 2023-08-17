@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
-function newUser() {
+function NewUser() {
 
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -49,4 +49,4 @@ function newUser() {
   )
 }
 
-export default newUser
+export default NewUser
