@@ -4,9 +4,10 @@ import { Routes } from "react-router-dom"
 import Header from "./Header-folder/Header.jsx"
 import Home from "./Home-folder/Home.jsx"
 import Physical from "./Pt-folder/PhysicalTherapy.jsx"
-import Exercises from "./Exercise-folder/exercises.jsx";
+import Exercises from "./Exercise-folder/Exercises.jsx";
 import Article from "./Article-folder/Article.jsx";
-import Account from "./Account-folder/Account.jsx";
+import Settings from "./Account-folder/Settings.jsx";
+import Appointments from "./Account-folder/Appointments.jsx"
 import Login from "./Login-folder/Login.jsx";
 import Faq from "./FAQ-folder/Faq.jsx";
 
@@ -48,13 +49,14 @@ console.log(user)
     <div className="App">
 
       <Header />
-      <Routes>Login up page</Routes>
-      <Routes>sign up page</Routes>
-      <Routes>Physical Therapist page</Routes>
-      <Routes>Exercises page</Routes>
-      <Routes path="/home" element={<Home />}>Home page</Routes>
-      <Routes>Account</Routes>
-      <Routes>Article page</Routes>
+      <Routes path="appointments" element={<Appointments />} />
+      <Routes path="faq" element={<Faq />}/>
+      <Routes path="/exercises" element={<Exercises />} />
+      <Routes path="/providers" element={<Physical />} />
+      <Routes path="/home" element={<Home />} />
+      <Routes path="/settings" element={<Settings />} />
+      <Routes path="/articles" element={<Article />} /> 
+      <Routes path="/Login" element={<Login />} /> 
 
     </div>
   );
