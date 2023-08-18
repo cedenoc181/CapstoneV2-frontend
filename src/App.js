@@ -90,16 +90,16 @@ console.log(user)
   return (
     <div className="App">
 
-      <Header user={user} logOut={setUser}/>
+      <Header activeUser={user} logOut={setUser}/>
       <Routes>
-          <Route path="appointments" element={<Appointments user={user}/>} />
-          <Route path="faq" element={<Faq user={user}/>}/>
-          <Route path="/exercises" element={<Exercise onSearch={onSearch} exercises={filteredExerciseFromSearch} user={user}/>} />
-          <Route path="/providers" element={<Providers therapist={filteredPtFromSearch} searchPt={ptSearch} user={user}/>} />
-          <Route path="/providers/:id" element={<ProviderDetail user={user} />} />
-          <Route path="/home" element={<Home user={user}/>} />
-          <Route path="/settings" element={<Settings user={user}/>} />
-          <Route path="/articles" element={<Article user={user}/>} /> 
+          <Route path="appointments" element={<Appointments activeUser={user}/>} />
+          <Route path="faq" element={<Faq activeUser={user}/>}/>
+          <Route path="/exercises" element={<Exercise onSearch={onSearch} exercises={filteredExerciseFromSearch} activeUser={user}/>} />
+          <Route path="/providers" element={<Providers therapist={filteredPtFromSearch} searchPt={ptSearch} activeUser={user}/>} />
+          <Route path="/providers/:id" element={<ProviderDetail activeUser={user} />} />
+          <Route path="/home" element={<Home activeUser={user}/>} />
+          <Route path="/settings" element={<Settings activeUser={user}/>} />
+          <Route path="/articles" element={<Article activeUser={user}/>} /> 
           <Route path="/Login" element={<Login />} /> 
       </Routes>
     </div>

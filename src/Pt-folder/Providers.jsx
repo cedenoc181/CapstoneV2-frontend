@@ -1,9 +1,10 @@
 import React from 'react'
 
-function PhysicalTherapy() {
+function Providers({activeUser}) {
+  console.log(activeUser)
   return (
-    <div>PhysicalTherapy</div>
+    <div>Providers</div>
   )
 }
 
-export default PhysicalTherapy
+export default Providers

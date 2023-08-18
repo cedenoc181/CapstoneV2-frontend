@@ -1,6 +1,9 @@
 import React from 'react'
 
-function Home() {
+function Home({activeUser}) {
+
+
+  console.log(activeUser)
   return (
     <div>Home</div>
   )

@@ -1,8 +1,9 @@
-import React, {useNavigate} from 'react'
+import React from 'react'
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 
-function Header({logOut}) {
+function Header({logOut, activeUser}) {
 
 
     const navigate = useNavigate();
@@ -47,9 +48,16 @@ function Header({logOut}) {
                   <li>
                   <Link to="/settings" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page">Settings</Link>
                   </li>
-                  <li>
+
+                { activeUser.empty?  
+                    <li>
                   <Link to="/home" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page" onClick={handleClick}>Logout</Link>
                   </li>
+                  : 
+                  <li>
+                  <Link to="/home" class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500 dark:bg-blue-600 md:dark:bg-transparent" aria-current="page" onClick={handleClick}>Login</Link>
+                  </li>
+                }
                 </ul>
             </div>
         </li>

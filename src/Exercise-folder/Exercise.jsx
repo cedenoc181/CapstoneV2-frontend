@@ -1,6 +1,8 @@
 import React from 'react'
 
-function Exercise() {
+function Exercise({activeUser}) {
+
+  console.log(activeUser)
   return (
     <div>Exercise</div>
   )

@@ -1,6 +1,7 @@
 import React from 'react'
 
-function Article() {
+function Article({activeUser}) {
+  console.log(activeUser)
   return (
     <div>Article</div>
   )
