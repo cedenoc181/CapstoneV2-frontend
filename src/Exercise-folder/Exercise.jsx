@@ -4,7 +4,7 @@ function Exercise({activeUser}) {
 
   console.log(activeUser)
   return (
-    <div>Exercise</div>
+    <div>Exercises</div>
   )
 }
 

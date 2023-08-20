@@ -8,8 +8,9 @@ import Providers from "./Pt-folder/Providers.jsx"
 import ProviderDetail from "./Pt-folder/ProviderDetail.jsx"
 import Exercise from "./Exercise-folder/Exercise.jsx";
 import Article from "./Article-folder/Article.jsx";
-import Settings from "./Account-folder/Settings.jsx";
-import Appointments from "./Account-folder/Appointments.jsx"
+// import Settings from "./Account-folder/Settings.jsx";
+// import Appointments from "./Account-folder/Appointments.jsx"
+import Account from "./Account-folder/Account.jsx"
 import Login from "./Login-folder/Login.jsx";
 import Faq from "./FAQ-folder/Faq.jsx";
 
@@ -89,16 +90,17 @@ console.log(user)
 
   return (
     <div className="App">
-
+{/* should i keep setting and appointments here even tho its passed in accounts component */}
       <Header activeUser={user} logOut={setUser}/>
       <Routes>
-          <Route path="appointments" element={<Appointments activeUser={user}/>} />
+          <Route path="/account" element={<Account activeUser={user}/>} />
+          {/* <Route path="/appointments" element={<Appointments activeUser={user}/>} /> */}
           <Route path="faq" element={<Faq activeUser={user}/>}/>
           <Route path="/exercises" element={<Exercise onSearch={onSearch} exercises={filteredExerciseFromSearch} activeUser={user}/>} />
           <Route path="/providers" element={<Providers therapist={filteredPtFromSearch} searchPt={ptSearch} activeUser={user}/>} />
           <Route path="/providers/:id" element={<ProviderDetail activeUser={user} />} />
           <Route path="/home" element={<Home activeUser={user}/>} />
-          <Route path="/settings" element={<Settings activeUser={user}/>} />
+          {/* <Route path="/settings" element={<Settings activeUser={user}/>} /> */}
           <Route path="/articles" element={<Article activeUser={user}/>} /> 
           <Route path="/Login" element={<Login />} /> 
       </Routes>
