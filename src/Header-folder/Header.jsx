@@ -1,18 +1,18 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 // import { Collapse } from 'flowbite';
 import { Link, useNavigate } from "react-router-dom"
 import "./Header.css"
  
 
 
-function Header({logOut, activeUser}) {
+function Header() {
 
-    const navigate = useNavigate();
-    function handleClick () {
-      localStorage.removeItem('jwt');
-      logOut(null);
-      navigate('/Login');
-  }
+  //   const navigate = useNavigate();
+  //   function handleClick () {
+  //     localStorage.removeItem('jwt');
+  //     logOut(null);
+  //     navigate('/Login');
+  // }
 
 
   return (

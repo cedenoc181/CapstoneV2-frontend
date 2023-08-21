@@ -13,7 +13,7 @@ import Article from "./Article-folder/Article.jsx";
 import Account from "./Account-folder/Account.jsx"
 import Login from "./Login-folder/Login.jsx";
 import Faq from "./FAQ-folder/Faq.jsx";
-
+import { FallingLines } from "react-loader-spinner"
 
 
 
@@ -25,6 +25,37 @@ const [exercises, setExercises] = useState([]);
 const [therapist, setTherapist] = useState([]);
 const [searchKey, setSearchKey] = useState('')
 const [searchPt, setSearchPt] = useState('')
+
+
+const [isLoading, setIsLoading] = useState(true);
+const [isLoading2, setIsLoading2] = useState(true);
+const [isLoading3, setIsLoading3] = useState(true);
+
+
+useEffect(() => {
+  if (isLoading) {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2300);
+  } 
+}, [isLoading]);
+
+useEffect(() => {
+  if (isLoading2) {
+    setTimeout(() => {
+      setIsLoading2(false);
+    }, 2300);
+  } 
+}, [isLoading2]);
+
+useEffect(() => {
+  if (isLoading3) {
+    setTimeout(() => {
+      setIsLoading3(false);
+    }, 2300);
+  } 
+}, [isLoading3]);
+
 
 useEffect(() => {
   axios.get("http://localhost:9292/exercises").then((response) => {
@@ -93,12 +124,17 @@ console.log(user)
   return (
     <div className="App">
 {/* should i keep setting and appointments here even tho its passed in accounts component */}
-      <Header activeUser={user} logOut={setUser}/>
+      <Header />
       <Routes>
-          <Route path="/account" element={<Account activeUser={user}/>} />
+          <Route path="/account" element={<Account activeUser={user} logOut={setUser}/>} />
           {/* <Route path="/appointments" element={<Appointments activeUser={user}/>} /> */}
           <Route path="faq" element={<Faq activeUser={user}/>}/>
-          <Route path="/exercises" element={<Exercise searchGIF={searchGIF} exercisesGIF={filteredExerciseFromSearch} activeUser={user}/>} />
+          <Route path="/exercises" element={ isLoading ? (<FallingLines
+  color="#4fa94d"
+  width="100"
+  visible={true}
+  ariaLabel='falling-lines-loading'
+/>) : (<Exercise searchGIF={searchGIF} exercisesGIF={filteredExerciseFromSearch} activeUser={user}/>)} />
           <Route path="/providers" element={<Providers searchPt={ptSearch} therapist={filteredPtFromSearch} activeUser={user}/>} />
           <Route path="/providers/:id" element={<ProviderDetail activeUser={user} />} />
           <Route path="/home" element={<Home activeUser={user}/>} />

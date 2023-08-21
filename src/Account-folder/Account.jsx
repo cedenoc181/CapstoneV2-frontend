@@ -2,14 +2,14 @@ import React from 'react'
 import Settings from "./Settings.jsx"
 import Appointments from "./Appointments.jsx"
 
-function Account({activeUser}) {
+function Account({activeUser, logOut}) {
 
 console.log(activeUser)
 
   return (
     <div>
         Account
-    <Settings activeUser={activeUser}/>
+    <Settings activeUser={activeUser} logOut={logOut}/>
     <Appointments activeUser={activeUser}/>
     </div>
   )
