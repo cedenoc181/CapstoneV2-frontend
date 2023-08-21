@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Exercise-FavButton() {
+function ExerciseFavsGIF() {
   return (
     <div>Exercise-FavButton</div>
   )
 }
 
-export default Exercise-FavButton
+export default ExerciseFavsGIF

@@ -61,9 +61,11 @@ console.log(user)
   // onSearch functionn is passed down to the exercise component to relay user
   //  input to match database exercise name based on bodypart, target, name, equipment
   // based onn the filter function
-  function onSearch (searchKey){
+  function searchGIF (searchKey){
     setSearchKey(searchKey)
   }
+
+
 
   const filteredExerciseFromSearch = exercises.filter((exercise) => {
     return exercise.bodyPart.toLowerCase().includes(searchKey.toLowerCase()) +
@@ -96,8 +98,8 @@ console.log(user)
           <Route path="/account" element={<Account activeUser={user}/>} />
           {/* <Route path="/appointments" element={<Appointments activeUser={user}/>} /> */}
           <Route path="faq" element={<Faq activeUser={user}/>}/>
-          <Route path="/exercises" element={<Exercise onSearch={onSearch} exercises={filteredExerciseFromSearch} activeUser={user}/>} />
-          <Route path="/providers" element={<Providers therapist={filteredPtFromSearch} searchPt={ptSearch} activeUser={user}/>} />
+          <Route path="/exercises" element={<Exercise searchGIF={searchGIF} exercisesGIF={filteredExerciseFromSearch} activeUser={user}/>} />
+          <Route path="/providers" element={<Providers searchPt={ptSearch} therapist={filteredPtFromSearch} activeUser={user}/>} />
           <Route path="/providers/:id" element={<ProviderDetail activeUser={user} />} />
           <Route path="/home" element={<Home activeUser={user}/>} />
           {/* <Route path="/settings" element={<Settings activeUser={user}/>} /> */}
