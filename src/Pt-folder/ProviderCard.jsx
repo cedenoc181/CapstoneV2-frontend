@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ProviderCard() {
+function ProviderCard({pt, activeUser}) {
   return (
     <div>ProviderCard</div>
   )

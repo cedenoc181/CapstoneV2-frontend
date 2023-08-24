@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Providers({activeUser}) {
+function Providers({activeUser, therapist, searchPt}) {
   console.log(activeUser)
   return (
     <div>Providers</div>
