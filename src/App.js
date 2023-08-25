@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 import Header from "./Header-folder/Header.jsx";
@@ -13,7 +13,7 @@ import Article from "./Article-folder/Article.jsx";
 import Account from "./Account-folder/Account.jsx";
 import Login from "./Login-folder/Login.jsx";
 import Faq from "./FAQ-folder/Faq.jsx";
-import { FallingLines } from "react-loader-spinner";
+// import { RotatingSquare } from "react-loader-spinner";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,59 +22,66 @@ function App() {
   const [searchKey, setSearchKey] = useState("");
   const [searchPt, setSearchPt] = useState("");
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [isLoading2, setIsLoading2] = useState(true);
-  const [isLoading3, setIsLoading3] = useState(true);
+  // const [loading, setLoading] = useState(true);
+  // const [isLoading2, setIsLoading2] = useState(true);
+  // const [isLoading3, setIsLoading3] = useState(true);
+  // console.log(loading)
+
+
+  // useEffect(() => {
+  //   console.log("Effect ran");
+  //   if (loading) {
+  //     setTimeout(() => {
+  //       setLoading(false);
+  //     }, 1200);
+  //   }
+  // }, [loading]);
+
+  // useEffect(() => {
+  //   if (isLoading2) {
+  //     setTimeout(() => {
+  //       setIsLoading2(false);
+  //     }, 2300);
+  //   }
+  // }, [isLoading2]);
+
+  // useEffect(() => {
+  //   if (isLoading3) {
+  //     setTimeout(() => {
+  //       setIsLoading3(false);
+  //     }, 2300);
+  //   }
+  // }, [isLoading3]);
 
   useEffect(() => {
-    if (isLoading === true) {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 2300);
-    }
-  }, [isLoading]);
-
-  useEffect(() => {
-    if (isLoading2) {
-      setTimeout(() => {
-        setIsLoading2(false);
-      }, 2300);
-    }
-  }, [isLoading2]);
-
-  useEffect(() => {
-    if (isLoading3) {
-      setTimeout(() => {
-        setIsLoading3(false);
-      }, 2300);
-    }
-  }, [isLoading3]);
-
-  useEffect(() => {
+    // exercise fetch
+    console.log("now fetching exercises")
     axios.get("http://localhost:9292/exercises").then((response) => {
       console.log(response.data, "exercise data from fetch");
       setExercises(response.data);
     });
-  }, []);
 
-  useEffect(() => {
+// Therapist fetch
+console.log("now fetching therapist")
     axios.get("http://localhost:9292/physical_therapists").then((response) => {
+      console.log(response.data, "therapist data from fetch");
       setTherapist(response.data);
     });
+
+// fetching logged user account
+console.log("now fetching user")
+fetch("http://localhost:9292/me", {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+  },
+}).then((response) => {
+  if (response.ok) {
+    response.json().then((data) => setUser(data.user));
+  }
+});
   }, []);
 
-  useEffect(() => {
-    fetch("http://localhost:9292/me", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    }).then((response) => {
-      if (response.ok) {
-        response.json().then((data) => setUser(data.user));
-      }
-    });
-  }, []);
-  console.log(user);
+  console.log(user, "now logged in");
   if (!user)
     return (
       <div className="login">
@@ -113,6 +120,8 @@ function App() {
     );
   });
 
+
+
   return (
     <div className="App">
       {/* should i keep setting and appointments here even tho its passed in accounts component */}
@@ -127,20 +136,12 @@ function App() {
         <Route
           path="/exercises"
           element={
-            isLoading ? (
-              <FallingLines
-                color="#4fa94d"
-                width="100"
-                visible={true}
-                ariaLabel="falling-lines-loading"
-              />
-            ) : (
               <Exercise
-                searchGIF={searchGIF}
-                exercisesGIF={filteredExerciseFromSearch}
-                activeUser={user}
-              />
-            )
+              searchGIF={searchGIF}
+              exercisesGIF={filteredExerciseFromSearch}
+              activeUser={user}
+            />
+         
           }
         />
         <Route
