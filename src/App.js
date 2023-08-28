@@ -23,7 +23,7 @@ function App() {
   const [searchPt, setSearchPt] = useState("");
 
   // const [loading, setLoading] = useState(true);
-  // const [isLoading2, setIsLoading2] = useState(true);
+  // const [loading2, setLoading2] = useState(true);
   // const [isLoading3, setIsLoading3] = useState(true);
   // console.log(loading)
 
@@ -79,7 +79,7 @@ fetch("http://localhost:9292/me", {
     response.json().then((data) => setUser(data.user));
   }
 });
-  }, []);
+})
 
   console.log(user, "now logged in");
   if (!user)
@@ -144,16 +144,18 @@ fetch("http://localhost:9292/me", {
          
           }
         />
+
         <Route
           path="/providers"
           element={
             <Providers
               searchPt={ptSearch}
               therapist={filteredPtFromSearch}
-              activeUser={user}
-            />
-          }
+              activeUser={user} 
         />
+      }
+      />  
+      
         <Route
           path="/providers/:id"
           element={<ProviderDetail activeUser={user} />}
@@ -164,7 +166,7 @@ fetch("http://localhost:9292/me", {
         <Route path="/Login" element={<Login />} />
       </Routes>
     </div>
-  );
+  )
 }
 
 export default App;
