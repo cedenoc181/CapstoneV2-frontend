@@ -157,7 +157,7 @@ fetch("http://localhost:9292/me", {
       />  
       
         <Route
-          path="/providers/:id"
+          path="/physical_therapists/:id"
           element={<ProviderDetail activeUser={user} />}
         />
         <Route path="/home" element={<Home activeUser={user} />} />
