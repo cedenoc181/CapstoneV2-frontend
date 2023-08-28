@@ -79,7 +79,7 @@ fetch("http://localhost:9292/me", {
     response.json().then((data) => setUser(data.user));
   }
 });
-})
+}, [])
 
   console.log(user, "now logged in");
   if (!user)
