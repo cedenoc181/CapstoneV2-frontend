@@ -1,6 +1,49 @@
 import {useState} from 'react'
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
 function ProviderReviews({therapist, activeUser}) {
+console.log(activeUser);
+const [feedback, setFeedback] = useState({})
+const [starRating, setStarRating] = useState('')
+const [pic, setPic] = useState('')
+const [text, setText] = useState('')
+const [newReview, setNewReview] = useState(therapist.reviews)
+
+console.log(StarOutlineIcon);
+
+function handleSubmit(e) {
+  e.preventDefault();
+  fetch(`http://localhost:9292/reviews`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({
+      user_id: activeUser.id,
+      physical_therapist_id: therapist.id,
+      users_review: text,
+      stars: starRating,
+      photo: pic
+  }),
+  })
+   .then(res => res.json())
+   .then(data => {
+      console.log(data)
+      setNewReview([...newReview, data])
+      setFeedback(data)
+      setStarRating()
+      setPic('')
+      setText('')
+      alert("Your Review has posted!")
+   })
+  }
+
+console.log(feedback)
+console.log(starRating)
+console.log(pic)
+console.log(text)
+
   return (
     <div className="testDiv">
 
@@ -8,9 +51,16 @@ function ProviderReviews({therapist, activeUser}) {
     <div className="box">
         <form onSubmit={handleSubmit}>
           <br/>
-          <label className='Rlabel'>Review Caption:</label>
+          <label className='Rlabel'>Star raiting:</label>
           <br/>
-          <input className='RcapInput' type="text" value={caption} onChange={(e) => setCaption(e.target.value)} placeholder="Review Caption"/>
+          <select name="rating" id="providerRating">
+            <option value="5"></option>
+            <option value="4"></option>
+            <option value="3"></option>
+            <option value="2"></option>
+            <option value="1"></option>
+          </select>
+          {/* <input className='RcapInput' type="text" value={stars} onChange={(e) => setCaption(e.target.value)} placeholder="Review Caption"/> */}
           <br/>
           <label className='Rlabel'>Share a Photo:</label>
           <br/>
