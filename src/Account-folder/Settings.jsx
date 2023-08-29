@@ -14,7 +14,12 @@ function Settings({activeUser, logOut}) {
 
     console.log(activeUser)
   return (
-    <div>Settings</div>
+    <div>
+<div onClick={handleClick}>
+  Logout
+</div>
+
+    </div>
   )
 }
 
