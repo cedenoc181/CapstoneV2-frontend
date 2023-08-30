@@ -1,6 +1,8 @@
 import {useState} from 'react'
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarIcon from '@mui/icons-material/Star';
+import Button from '@mui/material/Button';
+
 
 function ProviderReviews({therapist, activeUser}) {
 console.log(activeUser);
@@ -10,6 +12,11 @@ const [pic, setPic] = useState('')
 const [text, setText] = useState('')
 const [newReview, setNewReview] = useState(therapist.reviews)
 
+const [star1, setStar1] = useState(false)
+const [star2, setStar2] = useState(false)
+const [star3, setStar3] = useState(false)
+const [star4, setStar4] = useState(false)
+const [star5, setStar5] = useState(false)
 // console.log(StarOutlineIcon);
 
 function handleSubmit(e) {
@@ -45,6 +52,65 @@ console.log(starRating)
 console.log(pic)
 console.log(text)
 
+
+// creating on click function that highlights the stars rating 
+function handleClick1(){
+  setStar1(false)
+  setStar2(false)
+  setStar3(false)
+  setStar4(false)
+  setStar5(false)
+setStar1(!star1)
+}
+
+function handleClick2(){
+    setStar1(false)
+    setStar2(false)
+    setStar3(false)
+    setStar4(false)
+    setStar5(false)
+  setStar1(!star1)
+  setStar2(!star2)
+  }
+
+  function handleClick3(){
+      setStar1(false)
+      setStar2(false)
+      setStar3(false)
+      setStar4(false)
+      setStar5(false)
+    setStar1(!star1)
+    setStar2(!star2)
+    setStar3(!star3)
+   }
+
+    function handleClick4(){
+        setStar1(false)
+        setStar2(false)
+        setStar3(false)
+        setStar4(false)
+        setStar5(false)
+      setStar1(!star1)
+      setStar2(!star2)
+      setStar3(!star3)
+      setStar4(!star4)
+    }
+
+        function handleClick5(){
+          setStar1(false)
+          setStar2(false)
+          setStar3(false)
+          setStar4(false)
+          setStar5(false)
+      setStar1(!star1)
+      setStar2(!star2)
+      setStar3(!star3)
+      setStar4(!star4)
+      setStar5(!star5)
+      }
+
+
+
   return (
     <div className="testDiv">
 
@@ -62,6 +128,21 @@ console.log(text)
             <option value="2">⭐⭐</option>
             <option value="1">⭐</option>
           </select>
+
+          <div className="">
+          {star1 ? (<span className="star1" onClick={handleClick1}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={handleClick1}/>) }
+          {star2 ? (<span className="star2" onClick={handleClick2}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={handleClick2}/>) }
+          {star3 ? (<span className="star3" onClick={handleClick3}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={handleClick3}/>) }
+          {star4 ? (<span className="star4" onClick={handleClick4}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={handleClick4}/>) }
+          {star5 ? (<span className="star5" onClick={handleClick5}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={handleClick5}/>) }
+
+          {/*<Button startIcon={<StarOutlineIcon />}/>
+            <Button startIcon={<StarOutlineIcon />}/>
+            <Button startIcon={<StarOutlineIcon />}/>
+            <Button startIcon={<StarOutlineIcon />}/>
+            <Button startIcon={<StarOutlineIcon />}/> */}
+          </div>
+
           {/* <input className='RcapInput' type="text" value={stars} onChange={(e) => setCaption(e.target.value)} placeholder="Review Caption"/> */}
           <br/>
           <label className='Rlabel'>Share a Photo:</label>
