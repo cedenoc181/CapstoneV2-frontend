@@ -54,60 +54,20 @@ console.log(text)
 
 
 // creating on click function that highlights the stars rating 
-function handleClick1(){
-  setStar1(false)
-  setStar2(false)
-  setStar3(false)
-  setStar4(false)
-  setStar5(false)
-setStar1(!star1)
-}
+function handleClick(starNumber) {
+  console.log("click");
 
-function handleClick2(){
-    setStar1(false)
-    setStar2(false)
-    setStar3(false)
-    setStar4(false)
-    setStar5(false)
-  setStar1(!star1)
-  setStar2(!star2)
+  const newStarStates = Array(5).fill(false);
+  for (let i = 0; i < starNumber; i++) {
+    newStarStates[i] = true;
   }
-
-  function handleClick3(){
-      setStar1(false)
-      setStar2(false)
-      setStar3(false)
-      setStar4(false)
-      setStar5(false)
-    setStar1(!star1)
-    setStar2(!star2)
-    setStar3(!star3)
-   }
-
-    function handleClick4(){
-        setStar1(false)
-        setStar2(false)
-        setStar3(false)
-        setStar4(false)
-        setStar5(false)
-      setStar1(!star1)
-      setStar2(!star2)
-      setStar3(!star3)
-      setStar4(!star4)
-    }
-
-        function handleClick5(){
-          setStar1(false)
-          setStar2(false)
-          setStar3(false)
-          setStar4(false)
-          setStar5(false)
-      setStar1(!star1)
-      setStar2(!star2)
-      setStar3(!star3)
-      setStar4(!star4)
-      setStar5(!star5)
-      }
+  
+  setStar1(newStarStates[0]);
+  setStar2(newStarStates[1]);
+  setStar3(newStarStates[2]);
+  setStar4(newStarStates[3]);
+  setStar5(newStarStates[4]);
+}
 
 
 
@@ -121,20 +81,12 @@ function handleClick2(){
           <label className='Rlabel'>Star raiting:</label>
           <br/>
           {/* use material icon to replace the emojis withh clickable stars */}
-          <select name="rating" id="providerRating">
-            <option value="5">⭐⭐⭐⭐⭐</option>
-            <option value="4">⭐⭐⭐⭐</option>
-            <option value="3">⭐⭐⭐</option>
-            <option value="2">⭐⭐</option>
-            <option value="1">⭐</option>
-          </select>
-
           <div className="">
-          {star1 ? (<span className="star1" onClick={handleClick1}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={handleClick1}/>) }
-          {star2 ? (<span className="star2" onClick={handleClick2}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={handleClick2}/>) }
-          {star3 ? (<span className="star3" onClick={handleClick3}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={handleClick3}/>) }
-          {star4 ? (<span className="star4" onClick={handleClick4}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={handleClick4}/>) }
-          {star5 ? (<span className="star5" onClick={handleClick5}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={handleClick5}/>) }
+          {star1 ? (<span className="star1" onClick={() => handleClick(1)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(1)}/>) }
+          {star2 ? (<span className="star2" onClick={() => handleClick(2)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(2)}/>) }
+          {star3 ? (<span className="star3" onClick={() => handleClick(3)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(3)}/>) }
+          {star4 ? (<span className="star4" onClick={() => handleClick(4)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(4)}/>) }
+          {star5 ? (<span className="star5" onClick={() => handleClick(5)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(5)}/>) }
 
           {/*<Button startIcon={<StarOutlineIcon />}/>
             <Button startIcon={<StarOutlineIcon />}/>
