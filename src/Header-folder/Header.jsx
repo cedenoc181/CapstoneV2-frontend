@@ -7,17 +7,8 @@ import "./Header.css"
 
 function Header() {
 
-  //   const navigate = useNavigate();
-  //   function handleClick () {
-  //     localStorage.removeItem('jwt');
-  //     logOut(null);
-  //     navigate('/Login');
-  // }
-
-
   return (
-   
-
+  
 <nav className="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <Link to="/home" className="flex items-center">

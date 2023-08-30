@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
-import NewUser from "./NewUser.jsx"
-import ExistingUser from "./Existing.jsx"
+import React, {useState} from 'react';
+import NewUser from "./NewUser.jsx";
+import ExistingUser from "./Existing.jsx";
+
 
 
 function Login({onLogin}) {
@@ -16,7 +17,7 @@ function handleClick() {
 {log ? 
 (<ExistingUser onLogin={onLogin}/>)
 : 
-(<NewUser /> )
+(<NewUser/> )
 }
 
 <p className="accountOnclick" align="center" onClick={handleClick}>{log ? "Don't have an account? Sign up!" : "Have an account? Login!" }</p>

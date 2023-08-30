@@ -1,15 +1,16 @@
 import {useState} from 'react'
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import StarIcon from '@mui/icons-material/Star';
 
 function ProviderReviews({therapist, activeUser}) {
 console.log(activeUser);
 const [feedback, setFeedback] = useState({})
-const [starRating, setStarRating] = useState('')
+const [starRating, setStarRating] = useState("")
 const [pic, setPic] = useState('')
 const [text, setText] = useState('')
 const [newReview, setNewReview] = useState(therapist.reviews)
 
-console.log(StarOutlineIcon);
+// console.log(StarOutlineIcon);
 
 function handleSubmit(e) {
   e.preventDefault();
@@ -53,12 +54,13 @@ console.log(text)
           <br/>
           <label className='Rlabel'>Star raiting:</label>
           <br/>
+          {/* use material icon to replace the emojis withh clickable stars */}
           <select name="rating" id="providerRating">
-            <option value="5"></option>
-            <option value="4"></option>
-            <option value="3"></option>
-            <option value="2"></option>
-            <option value="1"></option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
           </select>
           {/* <input className='RcapInput' type="text" value={stars} onChange={(e) => setCaption(e.target.value)} placeholder="Review Caption"/> */}
           <br/>
@@ -81,7 +83,9 @@ console.log(text)
           <img  className="Rpic" src={review.photo} alt={review.user_id}/>
           </div>
           ))}
-           </div>
+          <StarOutlineIcon />
+          <StarIcon color="action" />
+            </div>
            </div>
   )
 }

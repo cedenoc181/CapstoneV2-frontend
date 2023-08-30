@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from '@mui/material/Button';
+import LoginIcon from '@mui/icons-material/Login';
 
 function Exsisting({onLogin}) {
 
@@ -53,7 +55,9 @@ function Exsisting({onLogin}) {
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <br />
-        <input type="submit" className="submit" value="login"></input>
+        <Button type="submit" className="submit" value="login" variant="outlined"
+      color="primary"
+      startIcon={<LoginIcon />} />
       </form>
     </div>
   );

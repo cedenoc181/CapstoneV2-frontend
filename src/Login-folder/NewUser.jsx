@@ -1,5 +1,10 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import Button from '@mui/material/Button';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+
+
+
 
 function NewUser() {
 
@@ -43,7 +48,9 @@ function NewUser() {
 
       <input type="password" placeholder="Enter password" className="pass" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}></input>
 
-      <input type="submit" className="submit"value="Sign Up"/>
+      <Button type="submit" className="submit" value="Sign Up" variant="outlined"
+      color="primary"
+      startIcon={ <PersonAddIcon />} />
     </form>
     </div>
   )
