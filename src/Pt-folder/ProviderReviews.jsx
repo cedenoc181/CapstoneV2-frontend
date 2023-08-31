@@ -57,8 +57,6 @@ console.log(text)
 function handleClick(starIndex) {
   console.log("click");
 
-  // const dataSet = parseInt(event.currentTarget.getAttribute("data-star"));
-
   const newStarStates = Array(5).fill(false);
   for (let i = 0; i < starIndex; i++) {
     newStarStates[i] = true;
@@ -70,6 +68,7 @@ function handleClick(starIndex) {
   setStar5(newStarStates[4]);
   setStarRating(starIndex);
 }
+
 
 
   return (
@@ -105,7 +104,7 @@ function handleClick(starIndex) {
         <h1 className='testimonies'>Testimonies</h1>
          {newReview.map((review)=> ( 
           <div className="testPost" key={review.id}>
-            <h3 className="star-rating" >{review.stars}</h3>
+            <h3 className="star-rating" >{"⭐".repeat(review.stars)}</h3>
             <p className="Rrev" >{review.users_review}</p>
           {/* <div>&nbsp;</div> */}
           <img  className="Rpic" src={review.photo} alt={review.user_id}/>
