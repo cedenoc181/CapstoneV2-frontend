@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
-import StarIcon from '@mui/icons-material/Star';
-import Button from '@mui/material/Button';
+
+
 
 
 function ProviderReviews({therapist, activeUser}) {
@@ -54,11 +54,13 @@ console.log(text)
 
 
 // creating on click function that highlights the stars rating 
-function handleClick(starNumber) {
+function handleClick(starIndex) {
   console.log("click");
 
+  // const dataSet = parseInt(event.currentTarget.getAttribute("data-star"));
+
   const newStarStates = Array(5).fill(false);
-  for (let i = 0; i < starNumber; i++) {
+  for (let i = 0; i < starIndex; i++) {
     newStarStates[i] = true;
   }
   setStar1(newStarStates[0]);
@@ -66,7 +68,9 @@ function handleClick(starNumber) {
   setStar3(newStarStates[2]);
   setStar4(newStarStates[3]);
   setStar5(newStarStates[4]);
+  setStarRating(starIndex);
 }
+
 
   return (
     <div className="testDiv">
@@ -79,11 +83,11 @@ function handleClick(starNumber) {
           <br/>
           {/* use material icon to replace the emojis withh clickable stars */}
           <div className="star-rating">
-          {star1 ? (<span className="star1" data-star="1" onClick={() => handleClick(1)}>⭐</span>) : (<StarOutlineIcon fontSize="small" data-star="0" onClick={() => handleClick(1)}/>) }
-          {star2 ? (<span className="star2" data-star="2" onClick={() => handleClick(2)}>⭐</span>) : (<StarOutlineIcon fontSize="small" data-star="0" onClick={() => handleClick(2)}/>) }
-          {star3 ? (<span className="star3" data-star="3" onClick={() => handleClick(3)}>⭐</span>) : (<StarOutlineIcon fontSize="small" data-star="0"onClick={() => handleClick(3)}/>) }
-          {star4 ? (<span className="star4" data-star="4" onClick={() => handleClick(4)}>⭐</span>) : (<StarOutlineIcon fontSize="small" data-star="0" onClick={() => handleClick(4)}/>) }
-          {star5 ? (<span className="star5" data-star="5" onClick={() => handleClick(5)}>⭐</span>) : (<StarOutlineIcon fontSize="small" data-star="0" onClick={() => handleClick(5)}/>) }
+          {star1 ? (<span className="star1" onClick={() => handleClick(1)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(1)}/>) }
+          {star2 ? (<span className="star2" onClick={() => handleClick(2)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(2)}/>) }
+          {star3 ? (<span className="star3" onClick={() => handleClick(3)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(3)}/>) }
+          {star4 ? (<span className="star4" onClick={() => handleClick(4)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(4)}/>) }
+          {star5 ? (<span className="star5" onClick={() => handleClick(5)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(5)}/>) }
           </div>
 
           {/* <input className='RcapInput' type="text" value={stars} onChange={(e) => setCaption(e.target.value)} placeholder="Review Caption"/> */}
@@ -101,14 +105,12 @@ function handleClick(starNumber) {
         <h1 className='testimonies'>Testimonies</h1>
          {newReview.map((review)=> ( 
           <div className="testPost" key={review.id}>
-            <h3 className="Rhead" >{review.review_header}</h3>
+            <h3 className="star-rating" >{review.stars}</h3>
             <p className="Rrev" >{review.users_review}</p>
           {/* <div>&nbsp;</div> */}
           <img  className="Rpic" src={review.photo} alt={review.user_id}/>
           </div>
           ))}
-          <StarOutlineIcon />
-          <StarIcon color="action" />
             </div>
            </div>
   )
