@@ -8,7 +8,7 @@ function ProviderCard({pt, activeUser}) {
   
   const navigate = useNavigate();
   
-console.log(state)
+// console.log(state)
 
   return (
     <div className="outterDiv">

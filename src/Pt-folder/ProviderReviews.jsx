@@ -61,15 +61,12 @@ function handleClick(starNumber) {
   for (let i = 0; i < starNumber; i++) {
     newStarStates[i] = true;
   }
-  
   setStar1(newStarStates[0]);
   setStar2(newStarStates[1]);
   setStar3(newStarStates[2]);
   setStar4(newStarStates[3]);
   setStar5(newStarStates[4]);
 }
-
-
 
   return (
     <div className="testDiv">
@@ -81,18 +78,12 @@ function handleClick(starNumber) {
           <label className='Rlabel'>Star raiting:</label>
           <br/>
           {/* use material icon to replace the emojis withh clickable stars */}
-          <div className="">
-          {star1 ? (<span className="star1" onClick={() => handleClick(1)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(1)}/>) }
-          {star2 ? (<span className="star2" onClick={() => handleClick(2)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(2)}/>) }
-          {star3 ? (<span className="star3" onClick={() => handleClick(3)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(3)}/>) }
-          {star4 ? (<span className="star4" onClick={() => handleClick(4)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(4)}/>) }
-          {star5 ? (<span className="star5" onClick={() => handleClick(5)}>⭐</span>) : (<StarOutlineIcon fontSize="small" onClick={() => handleClick(5)}/>) }
-
-          {/*<Button startIcon={<StarOutlineIcon />}/>
-            <Button startIcon={<StarOutlineIcon />}/>
-            <Button startIcon={<StarOutlineIcon />}/>
-            <Button startIcon={<StarOutlineIcon />}/>
-            <Button startIcon={<StarOutlineIcon />}/> */}
+          <div className="star-rating">
+          {star1 ? (<span className="star1" data-star="1" onClick={() => handleClick(1)}>⭐</span>) : (<StarOutlineIcon fontSize="small" data-star="0" onClick={() => handleClick(1)}/>) }
+          {star2 ? (<span className="star2" data-star="2" onClick={() => handleClick(2)}>⭐</span>) : (<StarOutlineIcon fontSize="small" data-star="0" onClick={() => handleClick(2)}/>) }
+          {star3 ? (<span className="star3" data-star="3" onClick={() => handleClick(3)}>⭐</span>) : (<StarOutlineIcon fontSize="small" data-star="0"onClick={() => handleClick(3)}/>) }
+          {star4 ? (<span className="star4" data-star="4" onClick={() => handleClick(4)}>⭐</span>) : (<StarOutlineIcon fontSize="small" data-star="0" onClick={() => handleClick(4)}/>) }
+          {star5 ? (<span className="star5" data-star="5" onClick={() => handleClick(5)}>⭐</span>) : (<StarOutlineIcon fontSize="small" data-star="0" onClick={() => handleClick(5)}/>) }
           </div>
 
           {/* <input className='RcapInput' type="text" value={stars} onChange={(e) => setCaption(e.target.value)} placeholder="Review Caption"/> */}
