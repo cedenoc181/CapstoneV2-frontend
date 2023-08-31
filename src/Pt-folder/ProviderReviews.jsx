@@ -4,6 +4,7 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 
 
 
+
 function ProviderReviews({therapist, activeUser}) {
 console.log(activeUser);
 const [feedback, setFeedback] = useState({})
@@ -17,6 +18,9 @@ const [star2, setStar2] = useState(false)
 const [star3, setStar3] = useState(false)
 const [star4, setStar4] = useState(false)
 const [star5, setStar5] = useState(false)
+
+// const [imageString, setImageString] = useState('');
+
 // console.log(StarOutlineIcon);
 
 function handleSubmit(e) {
@@ -69,6 +73,17 @@ function handleClick(starIndex) {
   setStarRating(starIndex);
 }
 
+const handleFileChange = (event) => {
+  const file = event.target.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setPic(e.target.result); // The data URL of the image as a string
+    };
+    reader.readAsDataURL(file); // Read the file as a data URL
+  }
+};
 
 
   return (
@@ -93,11 +108,11 @@ function handleClick(starIndex) {
           <br/>
           <label className='Rlabel'>Share a Photo:</label>
           <br/>
-          <input className='RcapInput' type="text" value={pic} onChange={(e) => setPic(e.target.value)} placeholder="Share a Photo"/>
+          <input className='RcapInput' type="file" onChange={handleFileChange} placeholder="Share a Photo"/>
           <br/>
           <label className='Rlabel'>Leave a Review:</label>
           <br/>
-          <input className='RcapInput' type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Leave a Review"/>
+          <textarea className='RcapInput' type="text" value={text} onChange={(e) => setText(e.target.value)} placeholder="Leave a Review"/>
           <br/>
           <input className='RcapSub' type="submit" value="Submit"/>
         </form>
