@@ -1,14 +1,11 @@
 import {useState} from 'react'
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
-
-
-
-
+import Resizer from 'react-image-file-resizer';
 
 function ProviderReviews({therapist, activeUser}) {
 console.log(activeUser);
 const [feedback, setFeedback] = useState({})
-const [starRating, setStarRating] = useState("")
+const [starRating, setStarRating] = useState(0)
 const [pic, setPic] = useState('')
 const [text, setText] = useState('')
 const [newReview, setNewReview] = useState(therapist.reviews)
@@ -79,9 +76,27 @@ const handleFileChange = (event) => {
   if (file) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      setPic(e.target.result); // The data URL of the image as a string
+
+      const blob = new Blob([e.target.result], { type: file.type });
+
+      // Create a File object from the Blob
+      const resizedFile = new File([blob], file.name, { type: file.type });
+
+      // Resize the file and get the data URL
+      Resizer.imageFileResizer(
+        resizedFile,
+        300, // maxWidth
+        300, // maxHeight
+        'JPEG', // compressFormat
+        80, // quality
+        0, // rotation
+        (uri) => {
+          setPic(uri); // Set the data URL as the state
+        },
+        'base64' // outputType
+      );
     };
-    reader.readAsDataURL(file); // Read the file as a data URL
+    reader.readAsArrayBuffer(file); // Read the file as a data URL
   }
 };
 
