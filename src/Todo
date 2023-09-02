@@ -16,3 +16,10 @@ Home component
       - articles recently posted 
       - google maps of provider location 
       -   
+
+  Exercise component 
+  - filter fetches for body part selected 
+  - filter based on equipmennt selected 
+  - add fav exercises 
+  - ability to print out all fav exercises ?
+  - ability to fetch all exercises 

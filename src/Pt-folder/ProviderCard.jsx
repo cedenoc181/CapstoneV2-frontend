@@ -9,6 +9,7 @@ function ProviderCard({pt, activeUser}) {
   const navigate = useNavigate();
   
 // console.log(state)
+console.log(pt.reviews.length)
 
   return (
     <div className="outterDiv">
@@ -23,7 +24,7 @@ function ProviderCard({pt, activeUser}) {
           Dr. {pt.first_name} {pt.last_name}, {pt.title}
         </div>
         <div className="ptSpec">{pt.specialization}</div>
-        <div className="pt-rating">⭐ {pt.rating}</div>
+        <div className="pt-rating">⭐ {pt.rating} <span>{pt.reviews.length} reviews</span></div>
         <div className="ptClinic">🏥: {pt.clinic_address}</div>
         <div><span className="ptNetwork">Network:</span> {pt.insurances}.</div>        {/* <div className="ptAbout">{pt.about_me}</div> */}
       </section>

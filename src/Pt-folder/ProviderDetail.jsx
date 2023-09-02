@@ -11,6 +11,7 @@ function ProviderDetail({activeUser}) {
 
   console.log(state);
   console.log(activeUser);
+  console.log(state.pt.reviews)
 
   const param = useParams();
     console.log(param.id);
@@ -51,9 +52,10 @@ function ProviderDetail({activeUser}) {
         </div>
         <div className="pt-rating">⭐ {state.pt.rating}</div>
         <div><span className="ptSpec">Specializes in 📁:</span> {state.pt.specialization}</div>
+        <div><span className="ptSpec">Languges spoken:</span> English and {state.pt.languages_spoken}</div>
         <div><span className="ptNetwork">Address 🏥:</span>  {state.pt.clinic_address}</div>
-        <div><span className="ptNetwork">Network 🌐:</span> {state.pt.insurances}.</div>
-        <div><span className="ptStudies">Studies 🏫:</span> {state.pt.studies}.</div>
+        <div><span className="ptNetwork">Network 🌐:</span> {state.pt.insurance_network}.</div>
+        <div><span className="ptStudies">Studies 🏫:</span> {state.pt.post_grad__education}.</div>
       </div>
       <ProviderReviews therapist={state.pt} activeUser={activeUser}/>
     </div>
