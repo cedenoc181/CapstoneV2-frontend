@@ -1,6 +1,7 @@
 import {React, useState, useEffect} from 'react'
 import { useLocation, useParams } from "react-router-dom";
 import ProviderReviews from './ProviderReviews';
+import ProviderScheduling from "./ProviderScheduling"
 
 
 
@@ -50,13 +51,15 @@ function ProviderDetail({activeUser}) {
         <div className="ptFirstLastName">
           Dr. {state.pt.first_name} {state.pt.last_name}, {state.pt.title}
         </div>
-        <div className="pt-rating">⭐ {state.pt.rating}</div>
+        <div className="pt-rating">⭐ {state.pt.rating}<span className="totalReviews">-{state.pt.reviews.length} Reviews</span></div>
         <div><span className="ptSpec">Specializes in 📁:</span> {state.pt.specialization}</div>
         <div><span className="ptSpec">Languges spoken:</span> English and {state.pt.languages_spoken}</div>
         <div><span className="ptNetwork">Address 🏥:</span>  {state.pt.clinic_address}</div>
         <div><span className="ptNetwork">Network 🌐:</span> {state.pt.insurance_network}.</div>
         <div><span className="ptStudies">Studies 🏫:</span> {state.pt.post_grad__education}.</div>
       </div>
+
+      <ProviderScheduling therapist={state.pt} activeUser={activeUser}/>
       <ProviderReviews therapist={state.pt} activeUser={activeUser}/>
     </div>
   )
