@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import ProviderCalendar from "./ProviderCalendar";
 
 function ProviderScheduling({ therapist, activeUser }) {
-  console.log(therapist);
-  console.log(activeUser);
+  // console.log(therapist);
+  // console.log(activeUser);
 
   const [selectedTime, setSelectedTime] = useState(null);
   const [appointment, setAppointment] = useState({});
@@ -23,7 +23,7 @@ function ProviderScheduling({ therapist, activeUser }) {
 
     const timeSlotDuration = 30; // 30 minutes
     const slots = [];
-    console.log(slots);
+    // console.log(slots);
 
     while (startTime < endTime) {
       slots.push({
@@ -37,9 +37,10 @@ function ProviderScheduling({ therapist, activeUser }) {
     return slots;
   }
 
+  // selecting time functionality, highlights choosen time slot false 
   const handleTimeSlotClick = (index) => {
     if (timeSlots[index].available) {
-      setSelectedTime(timeSlots[index].time);
+      setSelectedTime(timeSlots[index].time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
 
       // Update time slot availability
       const updatedTimeSlots = timeSlots.map((slot, i) => {
@@ -55,6 +56,7 @@ function ProviderScheduling({ therapist, activeUser }) {
   };
 
   console.log(selectedTime);
+  // boolean change on selected style of care functionality 
 
   const handleClinicChange = () => {
     setTelemedicine(false);
@@ -74,6 +76,8 @@ function ProviderScheduling({ therapist, activeUser }) {
     setClinic(false);
   };
 
+
+  // submits post request to appointments table in backend
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -136,11 +140,7 @@ function ProviderScheduling({ therapist, activeUser }) {
         </div>
         {selectedTime && (
           <p>
-            You selected the time:{" "}
-            {selectedTime.toLocaleTimeString([], {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
+            You selected the time:{selectedTime}
           </p>
         )}
         <label className="claimLabel">Brief description detailing visit:</label>

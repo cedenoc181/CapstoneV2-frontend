@@ -24,6 +24,7 @@ function ProviderCalendar() {
           orientation="landscape"
           onChange={(newValue) => {
             console.log(newValue.$d.getDate());
+            console.log(newValue.$d.getMonth() + 1); //
             setDataValue(newValue);
           }}
           shouldDisableDate={isWeekend}
