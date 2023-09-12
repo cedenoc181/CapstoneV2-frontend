@@ -13,6 +13,13 @@ function ProviderScheduling({ therapist, activeUser }) {
   const [clinic, setClinic] = useState(false);
   const [homeVisit, setHomeVisit] = useState(false);
   const [telemedicine, setTelemedicine] = useState(false);
+  const [dateSelected, setDateSelected] = useState(null);
+
+
+  // retrive date 
+  const appointmentDate = (dateSelected) => {
+    setDateSelected(dateSelected)
+  }
 
   // Function to generate time slots at 30-minute intervals
   function generateTimeSlots() {
@@ -55,7 +62,6 @@ function ProviderScheduling({ therapist, activeUser }) {
     }
   };
 
-  console.log(selectedTime);
   // boolean change on selected style of care functionality 
 
   const handleClinicChange = () => {
@@ -95,7 +101,7 @@ function ProviderScheduling({ therapist, activeUser }) {
         home_visit: homeVisit,
         telemedicine: telemedicine,
         clinic: clinic,
-        scheduled: selectedTime,
+        scheduled: `${dateSelected}/${selectedTime}`,
       }),
     })
       .then((response) => response.json())
@@ -113,12 +119,16 @@ function ProviderScheduling({ therapist, activeUser }) {
   console.log("Appointment created for", appointment);
   console.log(claim);
   console.log(selectedTime);
+
+
+console.log(`${dateSelected} ${selectedTime}`)
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
 
         <div>
-          <ProviderCalendar />
+          <ProviderCalendar appointmentDate={appointmentDate}/>
         </div>
 
         <br />

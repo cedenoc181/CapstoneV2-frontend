@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 
-function ProviderCalendar() {
+function ProviderCalendar({appointmentDate}) {
   const [dataValue, setDataValue] = React.useState(dayjs(new Date()));
+  const [selectedDate, setSelectedDate] = useState(``)
+
+
 
   const currentDate = dayjs();
   const minDate = currentDate; // Set the minimum date to the current date
@@ -16,6 +19,11 @@ function ProviderCalendar() {
     return day === 0 || day === 6; // Sunday (0) and Saturday (6)
   };
 
+
+ 
+  console.log("date selected",selectedDate);
+  appointmentDate(selectedDate);
+
   return (
     <div>
       <h1>Select an appointment date</h1>
@@ -23,8 +31,8 @@ function ProviderCalendar() {
         <StaticDatePicker
           orientation="landscape"
           onChange={(newValue) => {
-            console.log(newValue.$d.getDate());
-            console.log(newValue.$d.getMonth() + 1); //
+            // console.log(newValue.$d.getDate());
+            setSelectedDate(`${newValue.$d.getMonth() + 1}/${newValue.$d.getDate()}/${newValue.$d.getFullYear()}`); //
             setDataValue(newValue);
           }}
           shouldDisableDate={isWeekend}
