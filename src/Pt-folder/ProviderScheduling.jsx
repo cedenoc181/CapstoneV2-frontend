@@ -9,6 +9,7 @@ function ProviderScheduling({ therapist, activeUser }) {
   const [timeSlots, setTimeSlots] = useState(generateTimeSlots());
   const [isPending, setIsPending] = useState(false);
   const [claim, setClaim] = useState("");
+  const [clinic, setClinic] = useState(false);
   const [homeVisit, setHomeVisit] = useState(false);
   const [telemedicine, setTelemedicine] = useState(false);
 
@@ -55,16 +56,23 @@ function ProviderScheduling({ therapist, activeUser }) {
 
   console.log(selectedTime);
 
-// function handleChange(string) {
-//   if (string == "home") {
-//     setHomeVisit(!homeVisit);
-//   }
-//   else if (string == "tele") 
-//   {
-//     setTelemedicine(!telemedicine);
+  const handleClinicChange = () => {
+    setTelemedicine(false);
+    setHomeVisit(false);
+    setClinic(true);
+  };
 
-//   }
-// }
+  const handleHomeVisitChange = () => {
+    setHomeVisit(true);
+    setTelemedicine(false);
+    setClinic(false);
+  };
+
+  const handleTelemedicineChange = () => {
+    setTelemedicine(true);
+    setHomeVisit(false);
+    setClinic(false);
+  };
 
 
   function handleSubmit(e) {
@@ -99,6 +107,7 @@ function ProviderScheduling({ therapist, activeUser }) {
         setAppointment(data);
         setIsPending(false);
         setHomeVisit(false);
+        setClinic(false);
         setTelemedicine(false);
         setClaim("");
         alert("Appointment successflly created, We will see you soon!");
@@ -147,13 +156,26 @@ console.log(selectedTime)
           />
         </div>
         <div>&nbsp;</div>
+
+        <label className="inqClinic">Check for Clinic Inquiry: </label>
+        <div className="box">
+          <input
+            className="inqClinicInput"
+            type="checkbox"
+            checked={clinic}
+            onChange={handleClinicChange}
+          />
+        </div>
+        <br />
+
+
         <label className="inqHome">Check for Home Visit Inquiry: </label>
         <div className="box">
           <input
             className="inqHomeInput"
             type="checkbox"
             checked={homeVisit}
-            onChange={(() => setHomeVisit(!homeVisit))}
+            onChange={handleHomeVisitChange}
           />
         </div>
         <br />
@@ -164,7 +186,7 @@ console.log(selectedTime)
             className="inqTeleInput"
             type="checkbox"
             checked={telemedicine}
-            onChange={(() => setTelemedicine(!telemedicine))}
+            onChange={handleTelemedicineChange}
           />
         </div>
 
