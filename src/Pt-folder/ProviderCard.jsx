@@ -10,7 +10,7 @@ function ProviderCard({pt, activeUser}) {
   
 // console.log(state)
 console.log(pt.reviews.length);
-console.log(state.pt);
+// console.log(state.pt);
   return (
     <div className="outterDiv">
 

@@ -112,11 +112,11 @@ function ProviderScheduling({ therapist, activeUser }) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h1>Select a Appointment date</h1>
+
         <div>
           <ProviderCalendar />
         </div>
-        
+
         <br />
 
         <h2>Select an Appointment Time</h2>
