@@ -10,6 +10,7 @@ function ProviderScheduling({ therapist, activeUser }) {
   const [isPending, setIsPending] = useState(false);
   const [claim, setClaim] = useState("");
   const [homeVisit, setHomeVisit] = useState(false);
+  const [telemedicine, setTelemedicine] = useState(false);
 
   // Function to generate time slots at 30-minute intervals
   function generateTimeSlots() {
@@ -20,6 +21,7 @@ function ProviderScheduling({ therapist, activeUser }) {
 
     const timeSlotDuration = 30; // 30 minutes
     const slots = [];
+    console.log(slots)
 
     while (startTime < endTime) {
       slots.push({
@@ -31,20 +33,39 @@ function ProviderScheduling({ therapist, activeUser }) {
     }
 
     return slots;
+
   }
+
+ 
 
   const handleTimeSlotClick = (index) => {
     if (timeSlots[index].available) {
       setSelectedTime(timeSlots[index].time);
 
       // Update time slot availability
-      const updatedTimeSlots = [...timeSlots];
-      updatedTimeSlots[index].available = false;
+      const updatedTimeSlots = timeSlots.map((slot, i) => {
+        return i === index ? { ...slot, available: false } : { ...slot, available: true };
+      });
+      
       setTimeSlots(updatedTimeSlots);
+      console.log(timeSlots[index]);
+      console.log(updatedTimeSlots);
     }
   };
 
   console.log(selectedTime);
+
+// function handleChange(string) {
+//   if (string == "home") {
+//     setHomeVisit(!homeVisit);
+//   }
+//   else if (string == "tele") 
+//   {
+//     setTelemedicine(!telemedicine);
+
+//   }
+// }
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -59,34 +80,34 @@ function ProviderScheduling({ therapist, activeUser }) {
       body: JSON.stringify({
         user_id: activeUser.id,
         physical_therapist_id: therapist.id,
-        claim: claim,
+        case: claim,
         home_visit: homeVisit,
+        telemedicine: telemedicine, 
         scheduled: selectedTime,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        if (data.success) {
-          console.log(data.success, "data from post request");
-          setAppointment(data);
-        } else {
-          console.log(data.error, "data error catcher");
-        }
+        // console.log(data);
+        // if (data.success) {
+        //   console.log(data.success, "data from post request");
+        //   setAppointment(data);
+        //   console.log(appointment, "appointment created");
+        // } else {
+        //   console.log(data.error, "data error catcher");
+        // }
+        setAppointment(data);
         setIsPending(false);
         setHomeVisit(false);
+        setTelemedicine(false);
         setClaim("");
         alert("Appointment successflly created, We will see you soon!");
         // navigate("/Account")
       });
   }
-  console.log(appointment, "appointment created");
-  console.log(claim, "claim created");
-
-  function handleClick() {
-    setHomeVisit(!homeVisit);
-  }
-
+ console.log("Appointment created for", appointment);
+console.log(claim);
+console.log(selectedTime)
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -114,13 +135,10 @@ function ProviderScheduling({ therapist, activeUser }) {
             })}
           </p>
         )}
-        {/* <br/>
-{appointment !== new Date() ? <h3 className='dateSelected'>Appointment Scheduled for: {selectedTime}</h3> : null}
-<br/> */}
         <label className="claimLabel">Brief description detailing visit:</label>
         <br />
         <div className="box">
-          <input
+          <textarea
             type="text"
             value={claim}
             onChange={(e) => setClaim(e.target.value)}
@@ -134,11 +152,22 @@ function ProviderScheduling({ therapist, activeUser }) {
           <input
             className="inqHomeInput"
             type="checkbox"
-            value={homeVisit}
-            onClick={handleClick}
+            checked={homeVisit}
+            onChange={(() => setHomeVisit(!homeVisit))}
           />
         </div>
         <br />
+
+        <label className="inqTele">Check for Telemedicine Inquiry: </label>
+        <div className="box">
+          <input
+            className="inqTeleInput"
+            type="checkbox"
+            checked={telemedicine}
+            onChange={(() => setTelemedicine(!telemedicine))}
+          />
+        </div>
+
         <div className="box">
           {!isPending && (
             <button className="appbutton" onClick={handleSubmit}>
