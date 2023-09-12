@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ProviderCalendar from "./ProviderCalendar";
 
 function ProviderScheduling({ therapist, activeUser }) {
   console.log(therapist);
@@ -22,7 +23,7 @@ function ProviderScheduling({ therapist, activeUser }) {
 
     const timeSlotDuration = 30; // 30 minutes
     const slots = [];
-    console.log(slots)
+    console.log(slots);
 
     while (startTime < endTime) {
       slots.push({
@@ -34,10 +35,7 @@ function ProviderScheduling({ therapist, activeUser }) {
     }
 
     return slots;
-
   }
-
- 
 
   const handleTimeSlotClick = (index) => {
     if (timeSlots[index].available) {
@@ -45,9 +43,11 @@ function ProviderScheduling({ therapist, activeUser }) {
 
       // Update time slot availability
       const updatedTimeSlots = timeSlots.map((slot, i) => {
-        return i === index ? { ...slot, available: false } : { ...slot, available: true };
+        return i === index
+          ? { ...slot, available: false }
+          : { ...slot, available: true };
       });
-      
+
       setTimeSlots(updatedTimeSlots);
       console.log(timeSlots[index]);
       console.log(updatedTimeSlots);
@@ -74,7 +74,6 @@ function ProviderScheduling({ therapist, activeUser }) {
     setClinic(false);
   };
 
-
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -90,20 +89,13 @@ function ProviderScheduling({ therapist, activeUser }) {
         physical_therapist_id: therapist.id,
         case: claim,
         home_visit: homeVisit,
-        telemedicine: telemedicine, 
+        telemedicine: telemedicine,
+        clinic: clinic,
         scheduled: selectedTime,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
-        // if (data.success) {
-        //   console.log(data.success, "data from post request");
-        //   setAppointment(data);
-        //   console.log(appointment, "appointment created");
-        // } else {
-        //   console.log(data.error, "data error catcher");
-        // }
         setAppointment(data);
         setIsPending(false);
         setHomeVisit(false);
@@ -114,13 +106,20 @@ function ProviderScheduling({ therapist, activeUser }) {
         // navigate("/Account")
       });
   }
- console.log("Appointment created for", appointment);
-console.log(claim);
-console.log(selectedTime)
+  console.log("Appointment created for", appointment);
+  console.log(claim);
+  console.log(selectedTime);
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h1>Select an Appointment Time</h1>
+        <h1>Select a Appointment date</h1>
+        <div>
+          <ProviderCalendar />
+        </div>
+        
+        <br />
+
+        <h2>Select an Appointment Time</h2>
         <div className="time-slot-container">
           {timeSlots.map((slot, index) => (
             <div
@@ -157,7 +156,7 @@ console.log(selectedTime)
         </div>
         <div>&nbsp;</div>
 
-        <label className="inqClinic">Check for Clinic Inquiry: </label>
+        <label className="inqClinic">Check for Clinic Visit Inquiry: </label>
         <div className="box">
           <input
             className="inqClinicInput"
@@ -167,7 +166,6 @@ console.log(selectedTime)
           />
         </div>
         <br />
-
 
         <label className="inqHome">Check for Home Visit Inquiry: </label>
         <div className="box">
@@ -180,7 +178,9 @@ console.log(selectedTime)
         </div>
         <br />
 
-        <label className="inqTele">Check for Telemedicine Inquiry: </label>
+        <label className="inqTele">
+          Check for Telemedicine Visit Inquiry:{" "}
+        </label>
         <div className="box">
           <input
             className="inqTeleInput"

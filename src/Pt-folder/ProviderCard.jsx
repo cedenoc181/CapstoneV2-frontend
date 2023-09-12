@@ -9,8 +9,8 @@ function ProviderCard({pt, activeUser}) {
   const navigate = useNavigate();
   
 // console.log(state)
-console.log(pt.reviews.length)
-
+console.log(pt.reviews.length);
+console.log(state.pt);
   return (
     <div className="outterDiv">
 
