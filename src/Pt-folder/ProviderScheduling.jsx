@@ -176,8 +176,11 @@ console.log(`${dateSelected} ${selectedTime}`)
           />
         </div>
         <br />
-
-        <label className="inqHome">Check for Home Visit Inquiry: </label>
+        {/* if therapist see patients for home visits or telemedicine display conditionally */}
+        {/* therapist table name is home_visits plural when making appoinntments data is singular home_visit */}
+{therapist.home_visits ? (
+        <div>
+          <label className="inqHome">Check for Home Visit Inquiry: </label>
         <div className="box">
           <input
             className="inqHomeInput"
@@ -187,7 +190,14 @@ console.log(`${dateSelected} ${selectedTime}`)
           />
         </div>
         <br />
+        </div>
+        ) 
+      : 
+      (" ")
+      }
 
+        {therapist.telemedicine ?
+          (<div>
         <label className="inqTele">
           Check for Telemedicine Visit Inquiry:{" "}
         </label>
@@ -199,6 +209,10 @@ console.log(`${dateSelected} ${selectedTime}`)
             onChange={handleTelemedicineChange}
           />
         </div>
+        </div>)
+        :
+        (" ")
+      }
 
         <div className="box">
           {!isPending && (
