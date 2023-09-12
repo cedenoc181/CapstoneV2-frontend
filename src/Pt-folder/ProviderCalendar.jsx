@@ -7,6 +7,10 @@ import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 function ProviderCalendar() {
   const [dataValue, setDataValue] = React.useState(dayjs(new Date()));
 
+  const currentDate = dayjs();
+  const minDate = currentDate; // Set the minimum date to the current date
+  const maxDate = currentDate.add(365, 'day'); // Set the maximum date to 365 days from the current date
+
   const isWeekend = (date) => {
     const day = date.day();
     return day === 0 || day === 6; // Sunday (0) and Saturday (6)
@@ -24,6 +28,8 @@ function ProviderCalendar() {
           }}
           shouldDisableDate={isWeekend}
           value={dataValue}
+          minDate={minDate}
+          maxDate={maxDate}
         />
       </LocalizationProvider>
     </div>
