@@ -2,7 +2,9 @@ Componets
 
 Providers Componets
 - CSS for all of provider files 
-- add Appointment scheduling 
+- add Appointment scheduling (done)
+- add email js to provider scheduling
+- navigation of user ot account after scheduling initial visit 
 - 
 
 Home component
@@ -23,3 +25,5 @@ Home component
   - add fav exercises 
   - ability to print out all fav exercises ?
   - ability to fetch all exercises 
+
+    

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import ProviderCalendar from "./ProviderCalendar";
 
 function ProviderScheduling({ therapist, activeUser }) {
   // console.log(therapist);
   // console.log(activeUser);
-
+  const navigate = useNavigate();
   const [selectedTime, setSelectedTime] = useState(null);
   const [appointment, setAppointment] = useState({});
   const [timeSlots, setTimeSlots] = useState(generateTimeSlots());
@@ -113,7 +114,10 @@ function ProviderScheduling({ therapist, activeUser }) {
         setTelemedicine(false);
         setClaim("");
         alert("Appointment successflly created, We will see you soon!");
-        // navigate("/Account")
+        if (activeUser.appointments.length <= 1) {
+          navigate("/Account")
+        }
+        // 
       });
   }
   console.log("Appointment created for", appointment);
