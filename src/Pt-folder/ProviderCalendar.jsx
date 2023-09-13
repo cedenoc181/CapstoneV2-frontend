@@ -31,7 +31,6 @@ function ProviderCalendar({appointmentDate}) {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <StaticDatePicker
           orientation="portrait"
-        //   showToolbar={false}
           slotProps={{
             actionBar: {
                 actions: ['today'],

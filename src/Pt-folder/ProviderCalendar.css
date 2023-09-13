@@ -5,3 +5,13 @@
 .MuiPickersToolbar-penIconButton {
     display: none;
 }
+
+.MuiPickersToolbar-root{
+    display: block;
+    justify-content: center;
+}
+
+.MuiGrid-root {
+    display: block;
+    justify-content: center;
+}
