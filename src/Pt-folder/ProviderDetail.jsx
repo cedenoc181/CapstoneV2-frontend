@@ -12,7 +12,7 @@ function ProviderDetail({activeUser}) {
 
   console.log(state);
   console.log(activeUser);
-  console.log(state.pt.reviews)
+  console.log(state.pt.reviews);
 
   const param = useParams();
     console.log(param.id);

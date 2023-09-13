@@ -100,7 +100,6 @@ const handleFileChange = (event) => {
   }
 };
 
-
   return (
     <div className="testDiv">
 
@@ -134,7 +133,8 @@ const handleFileChange = (event) => {
         <h1 className='testimonies'>Testimonies</h1>
          {newReview.map((review)=> ( 
           <div className="testPost" key={review.id}>
-            <h3 className="star-rating" >{"⭐".repeat(review.stars)}</h3>
+
+            <h3 className="star-rating" ><span>{}</span>{"⭐".repeat(review.stars)}</h3>
             <p className="Rrev" >{review.users_review}</p>
           {/* <div>&nbsp;</div> */}
           <img  className="Rpic" src={review.photo} alt={review.user_id}/>

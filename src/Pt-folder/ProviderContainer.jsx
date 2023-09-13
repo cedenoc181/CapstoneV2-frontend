@@ -2,7 +2,7 @@ import React from 'react'
 import ProviderSearch from "./ProviderSearch.jsx"
 import ProviderCard from "./ProviderCard.jsx"
 
-function ProviderContainer({therapist, activeUser, searchPt}) {
+function ProviderContainer({ therapist, activeUser, searchPt}) {
 
 console.log(activeUser)
 console.log(therapist)

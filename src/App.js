@@ -19,6 +19,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [exercises, setExercises] = useState([]);
   const [therapist, setTherapist] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const [searchPt, setSearchPt] = useState("");
 

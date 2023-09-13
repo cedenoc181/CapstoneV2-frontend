@@ -113,9 +113,11 @@ function ProviderScheduling({ therapist, activeUser }) {
         setClinic(false);
         setTelemedicine(false);
         setClaim("");
-        alert("Appointment successflly created, We will see you soon!");
         if (activeUser.appointments.length <= 1) {
-          navigate("/Account")
+          alert("Thank you, Appointment successfully created, We will see you soon for your initial evaluation!");
+              navigate("/account")
+        } else {
+          alert("Appointment successfully created, We will see you soon!");
         }
         // 
       });

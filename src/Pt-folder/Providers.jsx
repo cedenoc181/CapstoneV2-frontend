@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import { RotatingSquare } from "react-loader-spinner";
 import ProviderContainer from "./ProviderContainer"
 
-function Providers({activeUser, therapist, searchPt}) {
+function Providers({ activeUser, therapist, searchPt}) {
   console.log(activeUser)
 
   const [loading2, setLoading2] = useState(true);
@@ -31,7 +31,7 @@ function Providers({activeUser, therapist, searchPt}) {
             visible={true}
             />
             ) : (
-<ProviderContainer activeUser={activeUser} therapist={therapist} searchPt={searchPt}/>
+<ProviderContainer activeUser={activeUser} therapist={therapist} searchPt={searchPt} />
             )
             }
     </div>
