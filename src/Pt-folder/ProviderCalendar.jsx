@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import "./ProviderCalendar.css"
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -29,7 +30,13 @@ function ProviderCalendar({appointmentDate}) {
       <h1>Select an appointment date</h1>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <StaticDatePicker
-          orientation="landscape"
+          orientation="portrait"
+        //   showToolbar={false}
+          slotProps={{
+            actionBar: {
+                actions: ['today'],
+              },
+          }}
           onChange={(newValue) => {
             // console.log(newValue.$d.getDate());
             setSelectedDate(`${newValue.$d.getMonth() + 1}/${newValue.$d.getDate()}/${newValue.$d.getFullYear()}`); //
