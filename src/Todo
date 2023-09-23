@@ -26,4 +26,15 @@ Home component
   - ability to print out all fav exercises ?
   - ability to fetch all exercises 
 
-    
+    Account component 
+  - for settingns we can add 
+        - Cancellation and Rescheduling Policies 
+        - Account Deactivation
+        - Terms and Conditions
+        - ability to make everything spanish?
+        - email js for questions and concerns 
+  - for account we can add 
+        - input for the rest of users info 
+        - notification system for when user creates appointment 
+         - reviews posted and update 
+         -appointments

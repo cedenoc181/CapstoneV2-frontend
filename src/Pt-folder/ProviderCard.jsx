@@ -5,6 +5,7 @@ function ProviderCard({pt, activeUser}) {
 
   const location = useLocation();
   const state = location.state;
+  console.log(state);
   
   const navigate = useNavigate();
   

@@ -6,6 +6,7 @@ import Header from "./Header-folder/Header.jsx";
 import Home from "./Home-folder/Home.jsx";
 import Providers from "./Pt-folder/Providers.jsx";
 import ProviderDetail from "./Pt-folder/ProviderDetail.jsx";
+import AccountContactDetail from "./Account-folder/AccountContactDetail";
 import Exercise from "./Exercise-folder/Exercise.jsx";
 import Article from "./Article-folder/Article.jsx";
 // import Settings from "./Account-folder/Settings.jsx";
@@ -19,42 +20,12 @@ function App() {
   const [user, setUser] = useState(null);
   const [exercises, setExercises] = useState([]);
   const [therapist, setTherapist] = useState([]);
-  const [allUsers, setAllUsers] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const [searchPt, setSearchPt] = useState("");
 
-  // const [loading, setLoading] = useState(true);
-  // const [loading2, setLoading2] = useState(true);
-  // const [isLoading3, setIsLoading3] = useState(true);
-  // console.log(loading)
-
-
-  // useEffect(() => {
-  //   console.log("Effect ran");
-  //   if (loading) {
-  //     setTimeout(() => {
-  //       setLoading(false);
-  //     }, 1200);
-  //   }
-  // }, [loading]);
-
-  // useEffect(() => {
-  //   if (isLoading2) {
-  //     setTimeout(() => {
-  //       setIsLoading2(false);
-  //     }, 2300);
-  //   }
-  // }, [isLoading2]);
-
-  // useEffect(() => {
-  //   if (isLoading3) {
-  //     setTimeout(() => {
-  //       setIsLoading3(false);
-  //     }, 2300);
-  //   }
-  // }, [isLoading3]);
 
   useEffect(() => {
+  
     // exercise fetch
     console.log("now fetching exercises")
     axios.get("http://localhost:9292/exercises").then((response) => {
@@ -70,7 +41,7 @@ console.log("now fetching therapist")
     });
 
 // fetching logged user account
-console.log("now fetching user")
+console.log("now fetching current user")
 fetch("http://localhost:9292/me", {
   headers: {
     Authorization: `Bearer ${localStorage.getItem("jwt")}`,
@@ -80,7 +51,8 @@ fetch("http://localhost:9292/me", {
     response.json().then((data) => setUser(data.user));
   }
 });
-}, [])
+
+}, []);
 
   console.log(user, "now logged in");
   if (!user)
@@ -156,6 +128,10 @@ fetch("http://localhost:9292/me", {
         />
       }
       />  
+      <Route 
+      path="/account_detail/:id"
+      element={<AccountContactDetail activeUser={user} />} 
+      />
       
         <Route
           path="/physical_therapists/:id"
