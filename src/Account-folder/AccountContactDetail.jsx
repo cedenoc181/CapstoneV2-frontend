@@ -1,34 +1,30 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import Box from '@mui/material/Box';
-import Input from '@mui/material/Input';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
+import Box from "@mui/material/Box";
+import Input from "@mui/material/Input";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
 // import { useLocation, useParams } from "react-router-dom";
 
-function AccountContactDetail({activeUser}) {
-    const ariaLabel = { 'aria-label': 'description' };
+function AccountContactDetail({ activeUser }) {
+  const ariaLabel = { "aria-label": "description" };
 
-    // const [inputValueState, setInputValueState] = useState('');
-    // const [inputValueCity, setInputValueCity] = useState('');
-    const [userInput, setUserInput] = useState ({
-        first_name: "",
-        last_name: "",
-        city: "",
-        state: "", 
-        address: "", 
-        DOB: "", 
-        phone_number: "", 
-        insurance: "", 
-        insurance_member_id: ""
-    });
+  const [userInput, setUserInput] = useState({
+    first_name: activeUser.first_name,
+    last_name: activeUser.last_name,
+    city: activeUser.city,
+    state: activeUser.state,
+    address: activeUser.address,
+    DOB: activeUser.DOB,
+    phone_number: activeUser.phone_number,
+    insurance: activeUser.insurance,
+    insurance_member_id: activeUser.insurance_member_id,
+  });
 
   const location = useLocation();
   const state = location.state;
 
-
   const selectedState = [
-
     { state: "Alabama", abbreviation: "AL", city: "Birmingham" },
     { state: "Alaska", abbreviation: "AK", city: "Anchorage" },
     { state: "Arizona", abbreviation: "AZ", city: "Phoenix" },
@@ -78,142 +74,188 @@ function AccountContactDetail({activeUser}) {
     { state: "Washington", abbreviation: "WA", city: "Seattle" },
     { state: "West Virginia", abbreviation: "WV", city: "Charleston" },
     { state: "Wisconsin", abbreviation: "WI", city: "Milwaukee" },
-    { state: "Wyoming", abbreviation: "WY", city: "Cheyenne" }
+    { state: "Wyoming", abbreviation: "WY", city: "Cheyenne" },
   ];
 
+    function postToUser(e) {
+        e.preventDefault();
+        fetch(`http://localhost:9292/users/${activeUser.id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            first_name: userInput.first_name,
+            last_name: userInput.last_name,
+            phone_number: userInput.phone_number,
+            insurance: userInput.insurance,
+            insurance_member_id: userInput.insurance_member_id,
+            state: userInput.state,
+            city: userInput.city,
+            address: userInput.address,
+            DOB: userInput.DOB,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data, "you just updated your account!");
+            alert("Account updated");
+          });
+
+
+}
 
   console.log(selectedState);
   console.log(userInput);
   console.log(activeUser);
-  console.log(userInput.first_name);
-  console.log(userInput.city);
-  console.log(userInput.state);
+  
 
   return (
     <div>
+        <form onSubmit={postToUser}>
+      <Box
+        component="form"
+        sx={{
+          "& > :not(style)": { m: 1 },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <Input
+          placeholder={activeUser.first_name === '' ? ("First Name") : (activeUser.first_name)}
+          value={userInput.first_name}
+          onChange={(e) =>
+            setUserInput((prevInput) => ({
+              ...prevInput,
+              first_name: e.target.value,
+            }))
+          }
+          inputProps={ariaLabel}
+        />
 
-<Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1 },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <Input
-       placeholder= "First Name" 
-      value={userInput.first_name}  
-        onChange={e => setUserInput(prevInput => ({
-            ...prevInput, 
-            first_name: e.target.value
-        }))}
-    inputProps={ariaLabel}
-     />
+        <Input
+          placeholder={activeUser.last_name === '' ? ("Last Name") : (activeUser.last_name)}
+          value={userInput.last_name}
+          onChange={(e) =>
+            setUserInput((prevInput) => ({
+              ...prevInput,
+              last_name: e.target.value,
+            }))
+          }
+          inputProps={ariaLabel}
+        />
 
+        <div>
+          <TextField
+            id="outlined-select-state"
+            select
+            label={activeUser.state === '' ? ("State") : (activeUser.state)}
+            helperText="Please select your state"
+            value={userInput.state}
+            onChange={(e) =>
+              setUserInput((prevInput) => ({
+                ...prevInput,
+                state: e.target.value,
+              }))
+            }
+          >
+            {selectedState.map((option) => (
+              <MenuItem key={option.state} value={option.state}>
+                {option.abbreviation}
+              </MenuItem>
+            ))}
+          </TextField>
 
-      <Input 
-      placeholder="Last Name" 
-      value={userInput.last_name} 
-      onChange={e => setUserInput(prevInput => ({
-        ...prevInput, 
-        last_name: e.target.value
-    }))}
-      inputProps={ariaLabel} />
+          <TextField
+            id="outlined-select-city"
+            select
+            label={activeUser.city === '' ? ("City") : (activeUser.city)}
+            helperText="Please select your city"
+            value={userInput.city}
+            onChange={(e) =>
+              setUserInput((prevInput) => ({
+                ...prevInput,
+                city: e.target.value,
+              }))
+            }
+          >
+            {selectedState.map((option) => (
+              <MenuItem key={option.state} value={option.city}>
+                {option.city}
+              </MenuItem>
+            ))}
+          </TextField>
+        </div>
 
- <div>
-        <TextField
-          id="outlined-select-state"
-          select
-          label="Select State"
-          helperText="Please select your state"
-          value={userInput.state}
-          onChange={e => setUserInput(prevInput => ({
-            ...prevInput, 
-            state: e.target.value
-        }))
-    }
-        >
-          {selectedState.map((option) => (
-            <MenuItem key={option.state} value={option.state}>
-              {option.abbreviation}
-            </MenuItem>
-          ))}
-        </TextField>
+        <Input
+          placeholder={activeUser.address === '' ? ("Address") : (activeUser.address)}
+          value={userInput.address}
+          onChange={(e) =>
+            setUserInput((prevInput) => ({
+              ...prevInput,
+              address: e.target.value,
+            }))
+          }
+          inputProps={ariaLabel}
+        />
 
-        <TextField
-          id="outlined-select-city"
-          select
-          label="Select City"
-          helperText="Please select your city"
-          value={userInput.city}
-          onChange={e => setUserInput(prevInput => ({
-            ...prevInput, 
-            city: e.target.value
-        }))
-        }
-        >
-        {selectedState.map((option) => (
-            <MenuItem key={option.state} value={option.city}>
-              {option.city}
-            </MenuItem>
-          ))}
-        </TextField>
-      </div>
-
-      <Input 
-      placeholder="Address" 
-      value={userInput.address} 
-      onChange={e => setUserInput(prevInput => ({
-        ...prevInput, 
-        address: e.target.value
-    }))}
-      inputProps={ariaLabel} 
-      />
-
-      <Input 
-      placeholder="Date of birth" 
-      value={userInput.DOB} 
-      onChange={e => setUserInput(prevInput => ({
-        ...prevInput, 
-        DOB: e.target.value
-    }))}
-      inputProps={ariaLabel} 
-      />
-      <Input 
-      placeholder="Phone Number" 
-      value={userInput.phone_number} 
-      onChange={e => setUserInput(prevInput => ({
-        ...prevInput, 
-        phone_number: e.target.value
-    }))}
-      inputProps={ariaLabel}
-       />
-      <Input 
-      placeholder="Insurane" 
-      value={userInput.insurance} 
-      onChange={e => setUserInput(prevInput => ({
-        ...prevInput, 
-        insurance: e.target.value
-    }))}
-      inputProps={ariaLabel} 
-      />
-      <Input 
-      placeholder="Insurane member ID"
-      value={userInput.insurance_member_id} 
-      onChange={e => setUserInput(prevInput => ({
-        ...prevInput, 
-        insurance_member_id: e.target.value
-    }))}
-      inputProps={ariaLabel} />
-      <Input
-       disabled 
-       placeholder={activeUser.email}
-       defaultValue={activeUser.email} 
-       inputProps={ariaLabel} />
-    </Box>
-
+        <Input
+          placeholder={activeUser.DOB === '' ? ("Date of Birth") : (activeUser.DOB)}
+          value={userInput.DOB}
+          type= "date"
+          onChange={(e) =>
+            setUserInput((prevInput) => ({
+              ...prevInput,
+              DOB: e.target.value,
+            }))
+          }
+          inputProps={ariaLabel}
+        />
+        <Input
+          placeholder={activeUser.phone_number === '' ? ("Phone_number") : (activeUser.phone_number)}
+          value={userInput.phone_number}
+          type="tel"
+          onChange={(e) =>
+            setUserInput((prevInput) => ({
+              ...prevInput,
+              phone_number: e.target.value,
+            }))
+          }
+          inputProps={ariaLabel}
+        />
+        <Input
+          placeholder={activeUser.insurance === '' ? ("Insurance") : (activeUser.insurance)}
+          value={userInput.insurance}
+          onChange={(e) =>
+            setUserInput((prevInput) => ({
+              ...prevInput,
+              insurance: e.target.value,
+            }))
+          }
+          inputProps={ariaLabel}
+        />
+        <Input
+          placeholder={activeUser.insurance_member_id === '' ? ("Insurance member ID") : (activeUser.insurance_member_id)}
+          value={userInput.insurance_member_id}
+          onChange={(e) =>
+            setUserInput((prevInput) => ({
+              ...prevInput,
+              insurance_member_id: e.target.value,
+            }))
+          }
+          inputProps={ariaLabel}
+        />
+        <Input
+          disabled
+          placeholder={activeUser.email}
+          defaultValue={activeUser.email}
+          inputProps={ariaLabel}
+        />
+      </Box>
+      <input type="submit" value="Submit"/>
+      </form>
     </div>
-  )
+  );
 }
 
-export default AccountContactDetail
+export default AccountContactDetail;
