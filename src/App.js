@@ -71,10 +71,10 @@ fetch("http://localhost:9292/me", {
 
   const filteredExerciseFromSearch = exercises.filter((exercise) => {
     return (
-      exercise.bodyPart.toLowerCase().includes(searchKey.toLowerCase()) +
-      exercise.equipment.toLowerCase().includes(searchKey.toLowerCase()) +
-      exercise.target.toLowerCase().includes(searchKey.toLowerCase()) +
-      exercise.name.toLowerCase().includes(searchKey.toLowerCase())
+      (exercise.bodyPart && exercise.bodyPart.toLowerCase().includes(searchKey.toLowerCase())) ||
+      (exercise.equipment && exercise.equipment.toLowerCase().includes(searchKey.toLowerCase())) ||
+      (exercise.target && exercise.target.toLowerCase().includes(searchKey.toLowerCase())) ||
+      (exercise.name && exercise.name.toLowerCase().includes(searchKey.toLowerCase()))
     );
   });
 
@@ -84,15 +84,15 @@ fetch("http://localhost:9292/me", {
     setSearchPt(searchPt);
   }
 
+  // validates if data exisit, then renders data value(string) into low case
   const filteredPtFromSearch = therapist.filter((pt) => {
     return (
-      pt.first_name.toLowerCase().includes(searchPt.toLowerCase()) +
-      pt.clinic_address.toLowerCase().includes(searchPt.toLowerCase()) +
-      pt.specialization.toLowerCase().includes(searchPt.toLowerCase()) +
-      pt.last_name.toLowerCase().includes(searchPt.toLowerCase())
+      (pt.first_name && pt.first_name.toLowerCase().includes(searchPt.toLowerCase())) ||
+      (pt.clinic_address && pt.clinic_address.toLowerCase().includes(searchPt.toLowerCase())) ||
+      (pt.specialization && pt.specialization.toLowerCase().includes(searchPt.toLowerCase())) ||
+      (pt.last_name && pt.last_name.toLowerCase().includes(searchPt.toLowerCase()))
     );
   });
-
 
 
   return (

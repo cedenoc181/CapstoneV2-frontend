@@ -152,6 +152,7 @@ function AccountContactDetail({ activeUser }) {
             label={activeUser.state === '' ? ("State") : (activeUser.state)}
             helperText="Please select your state"
             value={userInput.state}
+            variant="filled"
             onChange={(e) =>
               setUserInput((prevInput) => ({
                 ...prevInput,
@@ -171,6 +172,7 @@ function AccountContactDetail({ activeUser }) {
             select
             label={activeUser.city === '' ? ("City") : (activeUser.city)}
             helperText="Please select your city"
+            variant="filled"
             value={userInput.city}
             onChange={(e) =>
               setUserInput((prevInput) => ({
@@ -215,6 +217,7 @@ function AccountContactDetail({ activeUser }) {
           placeholder={activeUser.phone_number === '' ? ("Phone_number") : (activeUser.phone_number)}
           value={userInput.phone_number}
           type="tel"
+          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
           onChange={(e) =>
             setUserInput((prevInput) => ({
               ...prevInput,
@@ -245,9 +248,10 @@ function AccountContactDetail({ activeUser }) {
           }
           inputProps={ariaLabel}
         />
-        <Input
+        <TextField
           disabled
           placeholder={activeUser.email}
+          helperText="Update email in settings"
           defaultValue={activeUser.email}
           inputProps={ariaLabel}
         />
